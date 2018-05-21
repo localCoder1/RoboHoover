@@ -2,7 +2,7 @@ package src;
 
 public class Movement
 {
-    private static final int LOWER_LIMIT = 0;
+    private final String INVALID_DIRECTION_MESSAGE = "Invalid direction. Trying next direction.";
 
     public void followInstructions(Scenario scenario)
     {
@@ -10,8 +10,15 @@ public class Movement
 
         for (String direction : directions)
         {
-            DirectionsType directionsType = DirectionsType.valueOf(direction);
-            directionsType.move(scenario);
+            try
+            {
+                DirectionsType directionsType = DirectionsType.valueOf(direction.toUpperCase());
+                directionsType.move(scenario);
+            }
+            catch (IllegalArgumentException e)
+            {
+                System.out.print(INVALID_DIRECTION_MESSAGE);
+            }
         }
     }
 }

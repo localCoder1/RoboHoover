@@ -14,6 +14,12 @@ public class South implements Directions
     public static void staticMoveMethod(Scenario scenario)
     {
         Point currentCoords = scenario.getCurrentCoords();
+        if (currentCoords.getY() == LOWER_LIMIT)
+        {
+            System.out.print(OUT_OF_BOUND_MESSAGE);
+            return;
+        }
+
         currentCoords.decrementY();
         scenario.getPatches().stream()
             .filter(point -> point.equals(currentCoords))
